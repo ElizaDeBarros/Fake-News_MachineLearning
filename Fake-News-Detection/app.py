@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-from static.config import username, password, server, database
+from config import username, password, server, database
 
 conn = f'postgresql+psycopg2://{username}:{password}@{server}/{database}'
 
