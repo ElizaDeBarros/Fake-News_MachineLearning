@@ -14,25 +14,24 @@ from config import username, password, server, database
 
 conn = f"host='{server}' dbname='{database}' user='{username}' password='{password}'"
 
-from flask_sqlalchemy import SQLAlchemy
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
-app.config['SQLALCHEMY_DATABASE_URI'] = conn
-# Remove tracking modifications
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+con = psycopg2.connect(conn)  
+cur = con.cursor()
+cur.execute("""select * from  training_data""")
+data = [col for col in cur]
 
-db = SQLAlchemy(app)
+index = [result[0] for result in data]
+url = [result[1] for result in data]
+headline = [result[2] for result in data]
+body = [result[3] for result in data]
+label = [result[4] for result in data]
 
-class Training(db.Model):
-    __tablename__ = 'training_data'
-
-    index = db.Column(db.Integer, primary_key=True)
-    urls = db.Column(db.String)
-    headline = db.Column(db.String)
-    body = db.Column(db.String)
-    label = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<training_data %r>' % (self.name)
+data_training = [{
+    "index": index,
+    "URLs": url,
+    "Headline": headline,
+    "Body": body,
+    "Label": label
+}]
 
 #################################################
 # Flask Routes
@@ -42,21 +41,33 @@ class Training(db.Model):
 def home():
 #    return ( "Welcome to the homepage"
     return(
-        "/data will take you to the json information"
+        #"/data will take you to the json information"
         render_template("index.html")
     )
 @app.route('/return')
 def return_info():
-    db.session.query(Training.urls).all()
+    
 
-@app.route('/data')
+    index = [result[0] for result in data]
+    url = [result[1] for result in data]
+    headline = [result[2] for result in data]
+    body = [result[3] for result in data]
+    label = [result[4] for result in data]
+
+    data_training = [{
+        "index": index,
+        "URLs": url,
+        "Headline": headline,
+        "Body": body,
+        "Label": label
+    }]
+
+    return jsonify(data_training)
+
+@app.route('/data/api')
 def send_data():
-    con = psycopg2.connect(conn)  
-    cur = con.cursor()
-    cur.execute("""select * from  training_data""")
-    data = [col for col in cur]
-    cur.close()
-    return jsonify(data)
+
+    return jsonify(data_training)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
