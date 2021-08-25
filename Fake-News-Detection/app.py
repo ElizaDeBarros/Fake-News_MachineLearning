@@ -1,10 +1,38 @@
 import psycopg2
-import os
 import sys
-from  flask import Flask, render_template, jsonify, request, redirect
+from  flask import Flask,render_template
+from flask import jsonify
 
 
 app = Flask(__name__)
+
+#################################################
+# Database Setup
+#################################################
+
+from config import username, password, server, database
+
+conn = f"host='{server}' dbname='{database}' user='{username}' password='{password}'"
+
+from flask_sqlalchemy import SQLAlchemy
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = conn
+# Remove tracking modifications
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Training(db.Model):
+    __tablename__ = 'training_data'
+
+    index = db.Column(db.Integer, primary_key=True)
+    urls = db.Column(db.String)
+    headline = db.Column(db.String)
+    body = db.Column(db.String)
+    label = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<training_data %r>' % (self.name)
 
 #################################################
 # Flask Routes
@@ -15,11 +43,15 @@ def home():
 #    return ( "Welcome to the homepage"
     return(
         "/data will take you to the json information"
+        render_template("index.html")
     )
+@app.route('/return')
+def return_info():
+    db.session.query(Training.urls).all()
 
 @app.route('/data')
 def send_data():
-    con = psycopg2.connect("host='finalprojgroup4.c26jlhodxytp.us-east-2.rds.amazonaws.com' dbname='FinalProjGroup4' user='postgres' password='group4winners'")  
+    con = psycopg2.connect(conn)  
     cur = con.cursor()
     cur.execute("""select * from  training_data""")
     data = [col for col in cur]
