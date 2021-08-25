@@ -32,47 +32,35 @@ class Training(db.Model):
     label = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<training_data %r>' % (self.name)
+        return '<Training %r>' % (self.urls)
 
 #################################################
 # Flask Routes
 #################################################
 
+# create route that renders index.html template
 @app.route("/")
 def home():
-#    return ( "Welcome to the homepage"
-    return(
-        "/data will take you to the json information"
-        #render_template("index.html")
-    )
-@app.route('/return')
-def return_info():
-    results = db.session.query(Training.urls).all()
-    
-    index = [result[0] for result in results]
-    url = [result[1] for result in results]
-    headline = [result[2] for result in results]
-    body = [result[3] for result in results]
-    label = [result[4] for result in results]
+    return render_template("index.html")
 
-    data_training = [{
-        "index": index,
-        "URLs": url,
-        "Headline": headline,
-        "Body": body,
-        "Label": label
-    }]
+@app.route("/data/api")
+def return_json():
+    results = db.session.query(Training.index, Training.urls, Training.headline, Training.body, Training.label).all()
 
-    return jsonify(data_training[0:2])
+    training_list = []
 
-@app.route('/data')
-def send_data():
-    con = psycopg2.connect(conn)  
-    cur = con.cursor()
-    cur.execute("""select * from  training_data""")
-    data = [col for col in cur]
-    cur.close()
-    return jsonify(data[0]])
+    for result in results:
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+        data_training = {
+            "index": result[0],
+            "URLs": result[1],
+            "Headline": result[2],
+            "Body": result[3],
+            "Label": result[4]
+        }
+        training_list.append(data_training)
+
+    return jsonify(training_list)
+
+if __name__ == "__main__":
+    app.run()
