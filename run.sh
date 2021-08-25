@@ -1,0 +1,1 @@
+FLASK_APP=Fake-News-Detection/app.py flask run
