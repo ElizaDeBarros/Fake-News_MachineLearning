@@ -1,3 +1,5 @@
-d3.json("http://localhost:5000/data").then(function(data) {
-    console.log(data[1][2])
+/* data route */
+const url = "/data/api";
+d3.json(url).then(function(response) {
+    console.log(response.URLs)
 })
