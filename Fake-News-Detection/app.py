@@ -1,6 +1,6 @@
 import psycopg2
 import sys
-from  flask import Flask,render_template
+from flask import Flask,render_template
 from flask import jsonify
 
 
