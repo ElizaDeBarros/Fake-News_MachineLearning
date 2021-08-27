@@ -10,17 +10,16 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-#from config import username, password, server, database
+from config import username, password, server, database
 
-username = "postgres"
-password = "group4winners"
-server = "finalprojgroup4.c26jlhodxytp.us-east-2.rds.amazonaws.com"
-database = "FinalProjGroup4"
+#username = "postgres"
+#password = "group4winners"
+#server = "finalprojgroup4.c26jlhodxytp.us-east-2.rds.amazonaws.com"
+#database = "FinalProjGroup4"
 
 conn = f'postgresql+psycopg2://{username}:{password}@{server}/{database}'
 
 from flask_sqlalchemy import SQLAlchemy
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
 app.config['SQLALCHEMY_DATABASE_URI'] = conn
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
