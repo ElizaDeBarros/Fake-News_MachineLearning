@@ -78,7 +78,7 @@ h1 {
     padding: 20px;
     margin: 0;
     background: black;
-    background-image: url("../images/fake_news_emoji.png");
+    background-image: url("images/fake_news_emoji.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
