@@ -64,6 +64,12 @@ def home():
             result=prediction
             ))
 
+    #if request.method == 'POST':
+    #    text = request.form['text']
+    #    return text
+    #else:
+    #    return render_template('index.html')
+
 @app.route("/data/api")
 def return_json():
     results = db.session.query(Training.index, Training.urls, Training.headline, Training.body, Training.label).all()

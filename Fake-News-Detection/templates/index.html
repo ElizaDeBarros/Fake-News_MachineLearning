@@ -24,7 +24,7 @@
         <div class="col-md-12">
           <aside class="filters">
             <div class="panel panel-default">
-                <form id = "form" form action="{{ url_for('index') }}" method="POST" class="form-color">
+                <form id = "form" class="form-color">
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item form-color">
@@ -35,25 +35,19 @@
                   
                   <table>
                   <tr>
-                    <td><button type="button" class="btn btn-default btn-color btn-primary-override">True or False?</button></td>
-                    <!-- Replace word true with result -->
-                    <td><h3 class="blink_me format-h3">true</h3></td>
+                    <tr>
+                      <td><button type="button" class="btn btn-default btn-color btn-primary-override">Check News</button></td>
+                      <!-- Render data here -->
+                      {% if text_result=='REAL'%}
+                      <td><h3 class="blink_me format-h3" style='color:green'>{{ text_result }}</h3></td>
+                      {% else %}
+                      <td><h3 class="blink_me format-h3" style='color:red'>{{ text_result }}</h3></td>
+                      {% endif %}
                   </tr>
-                  </table>
+                </table>
+              </table>
                 
                 </form>
-
-                <div class="result" align="center">
-                  {% if result %}
-                      {% for variable, value in original_input.items() %}
-                          <b>{{ variable }}</b> : {{ value }}
-                      {% endfor %}
-                      <br>
-                      <br> Fake or Real??:
-                         <p style="font-size:50px">{{ result }}</p>
-                  {% endif %}
-                </div>
-
               </div>
             </div>
          
