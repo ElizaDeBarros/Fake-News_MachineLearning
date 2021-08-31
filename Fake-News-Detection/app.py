@@ -49,26 +49,26 @@ loaded_model = joblib.load(filename)
 # create route that renders index.html template
 @app.route("/", methods={'GET', 'POST'})
 def home():
-    if request.method == 'GET':
-        return (render_template("index.html"))
+    #if request.method == 'GET':
+    #    return (render_template("index.html"))
     
-    if request.method == 'POST':
-        news = request.form['form']
-
-        input_variables = pd.DataFrame([[news]], columns= ['text'], dtype=float)
-        prediction = loaded_model.predict(input_variables)[0]
-
-        return (render_template("index.html", original_input={
-            'Text': news
-            },
-            result=prediction
-            ))
-
     #if request.method == 'POST':
-    #    text = request.form['text']
-    #    return text
-    #else:
-    #    return render_template('index.html')
+    #    news = request.form['form']
+
+    #    input_variables = pd.DataFrame([[news]], columns= ['text'], dtype=float)
+    #    prediction = loaded_model.predict(input_variables)[0]
+
+    #    return (render_template("index.html", original_input={
+    #        'Text': news
+    #        },
+    #        result=prediction
+    #        ))
+
+    if request.method == 'POST':
+        text = request.form['text']
+        return text
+    else:
+        return render_template('index.html')
 
 @app.route("/data/api")
 def return_json():
