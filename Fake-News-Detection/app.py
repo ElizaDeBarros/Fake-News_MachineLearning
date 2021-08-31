@@ -1,10 +1,10 @@
 import psycopg2
 import sys
-from flask import Flask,render_template
+from flask import Flask,render_template, request
 from flask import jsonify
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 #################################################
 # Database Setup
@@ -38,14 +38,31 @@ class Training(db.Model):
     def __repr__(self):
         return '<Training %r>' % (self.urls)
 
+import joblib
+filename = "Data_Gathering/Resources/test_model_save.sav"
+loaded_model = joblib.load(filename)
+
 #################################################
 # Flask Routes
 #################################################
 
 # create route that renders index.html template
-@app.route("/")
+@app.route("/", methods={'GET', 'POST'})
 def home():
-    return render_template("index.html")
+    if request.method == 'GET':
+        return (render_template("index.html"))
+    
+    if request.method == 'POST':
+        news = request.form['form']
+
+        input_variables = pd.DataFrame([[news]], columns= ['text'], dtype=float)
+        prediction = loaded_model.predict(input_variables)[0]
+
+        return (render_template("index.html", original_input={
+            'Text': news
+            },
+            result=prediction
+            ))
 
 @app.route("/data/api")
 def return_json():
