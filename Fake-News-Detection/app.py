@@ -20,7 +20,6 @@ database = "FinalProjGroup4"
 conn = f'postgresql+psycopg2://{username}:{password}@{server}/{database}'
 
 from flask_sqlalchemy import SQLAlchemy
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
 app.config['SQLALCHEMY_DATABASE_URI'] = conn
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
