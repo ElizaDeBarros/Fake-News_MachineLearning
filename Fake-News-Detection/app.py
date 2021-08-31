@@ -38,9 +38,12 @@ class Training(db.Model):
     def __repr__(self):
         return '<Training %r>' % (self.urls)
 
-import joblib
-filename = "Data_Gathering/Resources/test_model_save.sav"
-loaded_model = joblib.load(filename)
+###
+### Method to load in model once there is a saved model ###
+###
+#import joblib
+#filename = "Data_Gathering/Resources/test_model_save.sav"
+#loaded_model = joblib.load(filename)
 
 #################################################
 # Flask Routes
