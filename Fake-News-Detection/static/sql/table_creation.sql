@@ -14,7 +14,7 @@ drop table prediction_data
 
 create table prediction_data (
 	index bigint,
-	Body text,
+	Headline text,
 	Logistic_Regression text,
 	Naive_Bayes text,
 	Decision_Tree text,
