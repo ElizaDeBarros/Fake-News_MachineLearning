@@ -121,7 +121,7 @@ def return_json():
             "Decision_Tree": result[4],
             "Passive_Aggressive_Classifier": result[5]
         }
-        training_list.append(data_prediction)
+        prediction_list.append(data_prediction)
 
     return jsonify(prediction_list)
 
