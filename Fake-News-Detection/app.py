@@ -84,7 +84,7 @@ def home():
         text = request.form['text']
         return text
     else:
-        return render_template('index.html')
+        return render_template('index_backup_plan.html')
 
 @app.route("/data/api")
 def return_json():
@@ -106,7 +106,7 @@ def return_json():
     return jsonify(training_list)
 
 @app.route("/data/predictions")
-def return_json():
+def return_prediction():
     results = db.session.query(Prediction.index, Prediction.body, Prediction.logistic_regression, Prediction.naive_bayes, Prediction.decision_tree, Prediction.passive_aggressive_classifier).all()
 
     prediction_list = []

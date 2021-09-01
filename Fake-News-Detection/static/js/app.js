@@ -5,12 +5,15 @@ function init() {
     const url = "/data/predictions";
 
 d3.json(url).then(function(data) {
-        dataNews = data.news;   
-        console.log(data);
+        dataNews = data.Body;   
+        bodyList = [];
+        for (var i=0; i < data.length; i++) {
+            bodyList.push(data[i].index)
+        };
         
         // add the options to the button
         dropdownMenu.selectAll("option")
-            .data(dataNews)
+            .data(bodyList)
             .enter()
             .append("option")
             .text(a => a)
