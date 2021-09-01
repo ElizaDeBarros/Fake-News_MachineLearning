@@ -21,14 +21,14 @@ function init() {
             .text(a => a)
             .attr('value', a => a);
 
-        answers(uniqueHeadline[2])
+        answers(uniqueHeadline[0])
     });
 
 
 };
 
 // On change to the dropdown menu
-d3.selectAll("#selDataset").on("change", optionChanged);
+//d3.selectAll("#selDataset").on("change", optionChanged);
 
 // Function called by DOM changes
 function optionChanged() {
@@ -46,7 +46,7 @@ function answers(headline) {
         answer_dict = {}
         for (var i=0; i < data.length; i++) {
             //console.log(data[i].index)
-            if (data[i].index === headline) {                
+            if (data[i].Headline === headline) {                
                 answer_dict = {"Headline": data[i].Headline,
                  "Logistic_Regression": data[i].Logistic_Regression,
                  "Naive_Bayes": data[i].Naive_Bayes,
