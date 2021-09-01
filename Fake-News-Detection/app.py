@@ -42,7 +42,7 @@ class Prediction(db.Model):
     __tablename__ = 'prediction_data'
 
     index = db.Column(db.BigInteger, primary_key=True)
-    body = db.Column(db.Text)
+    headline = db.Column(db.Text)
     logistic_regression = db.Column(db.Text)
     naive_bayes = db.Column(db.Text)
     decision_tree = db.Column(db.Text)
@@ -107,7 +107,7 @@ def return_json():
 
 @app.route("/data/predictions")
 def return_prediction():
-    results = db.session.query(Prediction.index, Prediction.body, Prediction.logistic_regression, Prediction.naive_bayes, Prediction.decision_tree, Prediction.passive_aggressive_classifier).all()
+    results = db.session.query(Prediction.index, Prediction.headline, Prediction.logistic_regression, Prediction.naive_bayes, Prediction.decision_tree, Prediction.passive_aggressive_classifier).all()
 
     prediction_list = []
 
@@ -115,7 +115,7 @@ def return_prediction():
 
         data_prediction = {
             "index": result[0],
-            "Body": result[1],
+            "Headline": result[1],
             "Logistic_Regression": result[2],
             "Naive_Bayes": result[3],
             "Decision_Tree": result[4],
