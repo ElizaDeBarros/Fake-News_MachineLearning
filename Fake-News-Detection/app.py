@@ -1,10 +1,10 @@
 import psycopg2
 import sys
-from flask import Flask,render_template
+from flask import Flask,render_template, request
 from flask import jsonify
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 #################################################
 # Database Setup
@@ -38,14 +38,53 @@ class Training(db.Model):
     def __repr__(self):
         return '<Training %r>' % (self.urls)
 
+class Prediction(db.Model):
+    __tablename__ = 'prediction_data'
+
+    index = db.Column(db.BigInteger, primary_key=True)
+    body = db.Column(db.Text)
+    logistic_regression = db.Column(db.Text)
+    naive_bayes = db.Column(db.Text)
+    decision_tree = db.Column(db.Text)
+    passive_aggressive_classifier = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Prediction %r>' % (self.Body)
+
+###
+### Method to load in model once there is a saved model ###
+###
+#import joblib
+#filename = "Data_Gathering/Resources/test_model_save.sav"
+#loaded_model = joblib.load(filename)
+
 #################################################
 # Flask Routes
 #################################################
 
 # create route that renders index.html template
-@app.route("/")
+@app.route("/", methods={'GET', 'POST'})
 def home():
-    return render_template("index.html")
+    #if request.method == 'GET':
+    #    return (render_template("index.html"))
+    
+    #if request.method == 'POST':
+    #    news = request.form['form']
+
+    #    input_variables = pd.DataFrame([[news]], columns= ['text'], dtype=float)
+    #    prediction = loaded_model.predict(input_variables)[0]
+
+    #    return (render_template("index.html", original_input={
+    #        'Text': news
+    #        },
+    #        result=prediction
+    #        ))
+
+    if request.method == 'POST':
+        text = request.form['text']
+        return text
+    else:
+        return render_template('index.html')
 
 @app.route("/data/api")
 def return_json():
@@ -65,6 +104,26 @@ def return_json():
         training_list.append(data_training)
 
     return jsonify(training_list)
+
+@app.route("/data/predictions")
+def return_json():
+    results = db.session.query(Prediction.index, Prediction.body, Prediction.logistic_regression, Prediction.naive_bayes, Prediction.decision_tree, Prediction.passive_aggressive_classifier).all()
+
+    prediction_list = []
+
+    for result in results:
+
+        data_prediction = {
+            "index": result[0],
+            "Body": result[1],
+            "Logistic_Regression": result[2],
+            "Naive_Bayes": result[3],
+            "Decision_Tree": result[4],
+            "Passive_Aggressive_Classifier": result[5]
+        }
+        training_list.append(data_prediction)
+
+    return jsonify(prediction_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
