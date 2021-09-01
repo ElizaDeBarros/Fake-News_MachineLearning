@@ -38,6 +38,19 @@ class Training(db.Model):
     def __repr__(self):
         return '<Training %r>' % (self.urls)
 
+class Prediction(db.Model):
+    __tablename__ = 'prediction_data'
+
+    index = db.Column(db.BigInteger, primary_key=True)
+    Body = db.Column(db.Text)
+    Logistic_Regression = db.Column(db.Text)
+    Naive_Bayes = db.Column(db.Text)
+    Decision_Tree = db.Column(db.Text)
+    Passive_Aggressive_Classifier = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Prediction %r>' % (self.Body)
+
 ###
 ### Method to load in model once there is a saved model ###
 ###
@@ -91,6 +104,26 @@ def return_json():
         training_list.append(data_training)
 
     return jsonify(training_list)
+
+@app.route("/data/predictions")
+def return_json():
+    results = db.session.query(Prediction.index, Prediction.Body, Prediction.Logistic_Regression, Prediction.Naive_Bayes, Prediction.Decision_Tree, Prediction.Passive_Aggressive_Classifier).all()
+
+    prediction_list = []
+
+    for result in results:
+
+        data_prediction = {
+            "index": result[0],
+            "Body": result[1],
+            "Logistic_Regression": result[2],
+            "Naive_Bayes": result[3],
+            "Decision_Tree": result[4],
+            "Passive_Aggressive_Classifier": result[5]
+        }
+        training_list.append(data_prediction)
+
+    return jsonify(prediction_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
