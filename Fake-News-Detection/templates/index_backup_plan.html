@@ -22,13 +22,15 @@
     <div class="container">
         <div class="row margin-top-50">
             <div>
-            <div class="col-md-6">
-                <h5>Select News:</h5>
+            <div class="col-md-12">
+                <h4>Select News:</h4>
                 <select id="selDataset" onchange="optionChanged(this.value)"></select>
             </div>
-            <div class="col-md-6">
+            <br><br><br>
+            <div>
+            <div class="col-md-12">
                 
-                    <table>
+                    <table id='table-data'>
                         <thead>
                             <tr>
                                 <th class="table-head">Logistic Regression</th>
@@ -38,40 +40,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>
-                                {% if text_result1=='REAL'%}
-                                <h5 class="blink_me format-h5" style='color:green'>{{ text_result }}</h5>
-                                {% else %}
-                                <h5 class="blink_me format-h5" style='color:red'>{{ text_result }}</h5>
-                                {% endif %}
+                        <tr>
+                            <td class="logistic">
+                                <!-- <h5 class="blink_me format-h5"></h5> -->
                             </td>
-                            <td>
-                                {% if text_result=='REAL'%}
-                                <h5 class="blink_me format-h5" style='color:green'>{{ text_result }}</h5>
-                                {% else %}
-                                <h5 class="blink_me format-h5" style='color:red'>{{ text_result }}</h5>
-                                {% endif %}
+                            <td class="naive">
+                                <!-- <h5 class="blink_me format-h5 naive"></h5> -->
                             </td>
-                            <td>
-                                {% if text_result=='REAL'%}
-                                <h5 class="blink_me format-h5" style='color:green'>{{ text_result }}</h5>
-                                {% else %}
-                                <h5 class="blink_me format-h5" style='color:red'>{{ text_result }}</h5>
-                                {% endif %}
+                            <td class="decision">
+                                <!-- <h5 class="blink_me format-h5 decision"></h5> -->
                             </td>
-                            <td>
-                                {% if text_result=='REAL'%}
-                                <h5 class="blink_me format-h5" style='color:green'>{{ text_result }}</h5>
-                                {% else %}
-                                <h5 class="blink_me format-h5" style='color:red'>{{ text_result }}</h5>
-                                {% endif %}
+                            <td class = "passive">
+                                <!-- <h5 class="blink_me format-h5 passive"></h5> -->
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
