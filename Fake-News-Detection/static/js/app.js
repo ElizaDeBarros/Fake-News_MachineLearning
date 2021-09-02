@@ -35,8 +35,9 @@ function optionChanged() {
         // Prevent page from refreshing
         
     var dropdownMenu = d3.select("#selDataset");
-    var selection = d3.select("#logistic");
+    var selection = d3.selectAll('td');
     selection.html("");
+    
     // Assign the value of the dropdown menu option to a variable
     var newHeadline = dropdownMenu.property("value");
     // Initialize an empty array for the country's data
@@ -86,27 +87,13 @@ function answers(headline) {
             }
         };
         
-    //     console.log(answer_dict.Logistic_Regression);
-        // d3.select("#logistic").append(answer_dict.Logistic_Regression);
-        
-        // document.getElementById("#naive").value="";
-        
-        // d3.select('#decision').html("");
-        // d3.select('#passive').html("");
-        d3.select('td').enter.text(answer_dict.Logistic_Regression);
-        d3.select('td').enter.text(answer_dict.Naive_Bayes);
-        d3.select('#decision').append('td').text(answer_dict.Decision_Tree);
-        d3.select('#passive').append('td').text(answer_dict.Passive_Aggressive_Classifier);
+            
+        d3.selectAll('td').classed("logistic", true).text(answer_dict.Logistic_Regression);
+        d3.selectAll('td').classed("naive", true).text(answer_dict.Naive_Bayes);
+        d3.selectAll('td').classed("decision", true).text(answer_dict.Decision_Tree);
+        d3.selectAll('td').classed("passive", true).text(answer_dict.Passive_Aggressive_Classifier);
     });
 };
 
-
-// function to delete all contents of tbody before adding filtered data
-function delete_table() {
-    var table = document.getElementById("table-data");
-    while(table.rows.length > 0) {
-        table.deleteRow(1);
-    };
-};
 
 init();
