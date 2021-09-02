@@ -70,13 +70,14 @@ p {
 }
 
 /*****************************ID**********************************/
-#table-area {
+#table-data {
   text-align: center;
-  width: 30px;
+  width: 750px;
 }
 
 #selDataset {
   width:150px;
+  color:#0000FF;
 }
 
 /*****************************responsiveness**********************************/
