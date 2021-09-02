@@ -1,0 +1,290 @@
+/*****************************TAG STYLES**********************************/
+
+
+h1 {
+  font-size: 3.5 rem;
+  animation: title 1.2s forwards linear;
+  text-align: center;
+  padding: 40px;
+  margin: 0;
+  color:#F8F4E1;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-size: 2rem;
+  opacity: 0;
+  animation: subtitle 1.2s forwards linear;
+  animation-delay: 1.2s;
+  color: #F8F4E1;
+  
+}
+
+/*****************************CLASS**********************************/
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+
+
+.container-color {
+  background: #4E3620; 
+}
+
+
+.format-h5 {
+  text-transform: uppercase;
+  font-weight: bolder; 
+  color:#4E3620;
+  margin-left: 400px;
+  }
+
+.margin-top-50 {
+  margin-top: 40px;
+}
+
+.subtext {
+  position: relative;
+  height: 610px;
+  padding: 20px;
+  margin: 0;
+  background: black;
+  background-image: url("../images/fake_news_emoji.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: 28%;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 130px;
+  overflow: auto;
+}
+
+/*****************************ID**********************************/
+#table-data {
+  text-align: center;
+  width: 750px;
+}
+
+#selDataset {
+  width:150px;
+  color:#0000FF;
+}
+
+/*****************************responsiveness**********************************/
+@media (max-width: 1024px) {
+  .subtext {
+    height: 1050px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 80%;
+  }
+
+  h1 {
+    font-size: 120%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+  }
+
+  .format-h5 {
+    margin-left: 300px;
+    }
+}
+
+
+@media (max-width: 768px) {
+  .subtext {
+    height: 710px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 70%;
+  }
+
+  h1 {
+    font-size: 50%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+  }
+  .format-h5 {
+    margin-left: 200px;
+    }
+}
+
+@media (max-width: 540px) {
+  .subtext {
+    height: 410px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 63%;
+  }
+
+  h1 {
+    font-size: 50%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+  .format-h3 {
+    margin-left: 110px;
+    font-size: 16px;
+    }
+}
+
+@media (max-width: 414px) {
+  .subtext {
+    height: 375px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 60%;
+  }
+
+  h1 {
+    font-size: 20%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .format-h5 {
+    margin-left: 50px;
+    font-size: 14px;
+    }
+}
+
+
+@media (max-width: 410px) {
+  .subtext {
+    height: 360px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 55%;
+  }
+
+  h1 {
+    font-size: 1%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .subtext {
+    height: 430px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 45%;
+  }
+
+  h1 {
+    font-size: 1%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+  .format-h5 {
+    margin-left: 50px;
+    font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+  .subtext {
+    height: 370px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 60%;
+  }
+
+  h1 {
+    font-size: 1%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .format-h5 {
+    margin-left: 40px;
+    font-size: 14px;
+    }
+}
+
+@media (max-width: 310px) {
+  .subtext {
+    height: 300px;
+    padding: 20px;
+    background-position: center center;
+    background-size: 50%;
+  }
+
+  h1 {
+    font-size: 1%;
+    animation: title 1.2s forwards linear;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+
+/* keyframe animations which will be used to animate the title */
+@keyframes title {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    font-size: 2.5rem;
+    opacity: 1;
+  }
+}
+
+@keyframes subtitle {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
