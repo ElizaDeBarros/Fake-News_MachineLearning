@@ -38,9 +38,6 @@ p {
 }
 
 
-
-
-
 .format-h5 {
   text-transform: uppercase;
   font-weight: bolder; 
@@ -76,6 +73,10 @@ p {
 #table-area {
   text-align: center;
   width: 30px;
+}
+
+#selDataset {
+  width:150px;
 }
 
 /*****************************responsiveness**********************************/
